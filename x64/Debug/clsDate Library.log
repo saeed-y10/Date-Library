@@ -1,0 +1,7 @@
+﻿  main.cpp
+C:\Users\saeed\source\repos\clsDate Library\clsDate Library\clsString.h(40,1): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\saeed\source\repos\clsDate Library\clsDate Library\clsString.h(313,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\saeed\source\repos\clsDate Library\clsDate Library\clsString.h(358,1): warning C4267: 'return': conversion from 'size_t' to 'short', possible loss of data
+C:\Users\saeed\source\repos\clsDate Library\clsDate Library\clsString.h(491,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\saeed\source\repos\clsDate Library\clsDate Library\clsString.h(502,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  clsDate Library.vcxproj -> C:\Users\saeed\source\repos\clsDate Library\x64\Debug\clsDate Library.exe
