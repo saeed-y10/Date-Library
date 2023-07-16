@@ -320,6 +320,31 @@ public:
 		return Months[Month - 1];
 	}
 
+	static bool IsValidMonth(short Month)
+	{
+		return (Month >= 1 && Month <= 12);
+	}
+
+	static bool IsValidMonth(clsDate Date)
+	{
+		return IsValidMonth(Date.Month);
+	}
+
+	static bool IsValidDay(short Day, short Month, short Year)
+	{
+		return (Day >= 1 && Day <= NumberOfDaysInMonth(Month, Year));
+	}
+
+	static bool IsValidDay(clsDate Date)
+	{
+		return IsValidDay(Date.Day, Date.Month, Date.Year);
+	}
+
+	bool IsValidDay()
+	{
+		return IsValidDay(_Day, _Month, _Year);
+	}
+
 	static bool IsValid(short Day, short Month, short Year)
 	{
 		if (Day < 1 || Day > 31)
@@ -359,6 +384,60 @@ public:
 	bool IsValid()
 	{
 		return IsValid(_Day, _Month, _Year);
+	}
+
+	static bool IsMonthBeforeMonth2(short Month1, short Month2)
+	{
+		if (!IsValidMonth(Month1) || !IsValidMonth(Month2))
+			return false;
+
+		return Month1 < Month2;
+	}
+
+	static bool IsMonthBeforeMonth2(clsDate Date1, clsDate Date2)
+	{
+		return IsMonthBeforeMonth2(Date1.Month, Date2.Month);
+	}
+
+	bool IsMonthBeforeMonth2(clsDate Date2)
+	{
+		return IsMonthBeforeMonth2(_Month, Date2.Month);
+	}
+
+	static bool IsMonthAfterMonth2(short Month1, short Month2)
+	{
+		if (!IsValidMonth(Month1) || !IsValidMonth(Month2))
+			return false;
+
+		return Month1 > Month2;
+	}
+
+	static bool IsMonthAfterMonth2(clsDate Date1, clsDate Date2)
+	{
+		return IsMonthAfterMonth2(Date1.Month, Date2.Month);
+	}
+
+	bool IsMonthAfterMonth2(clsDate Date2)
+	{
+		return IsMonthAfterMonth2(_Month, Date2.Month);
+	}
+
+	static bool IsMonthEqualMonth2(short Month1, short Month2)
+	{
+		if (!IsValidMonth(Month1) || !IsValidMonth(Month2))
+			return false;
+
+		return Month1 == Month2;
+	}
+
+	static bool IsMonthEqualMonth2(clsDate Date1, clsDate Date2)
+	{
+		return IsMonthEqualMonth2(Date1.Month, Date2.Month);
+	}
+
+	bool IsMonthEqualMonth2(clsDate Date2)
+	{
+		return IsMonthEqualMonth2(_Month, Date2.Month);
 	}
 
 	static bool IsDateBeforeDate2(clsDate Date1, clsDate Date2)
@@ -1080,6 +1159,32 @@ public:
 	int GetDiffrenceInDays(clsDate Date2, bool InculdeEndDay = false)
 	{
 		return GetDiffrenceInDays(*this, Date2, InculdeEndDay);
+	}
+
+	static int GetDiffrenceInMonths(clsDate Date1, clsDate Date2, bool InculdeEndMonth = false)
+	{
+		int Months = 0;
+		short SwapFlagValue = 1;
+
+		if (!IsMonthBeforeMonth2(Date1, Date2))
+		{
+			Swap(Date1, Date2);
+			SwapFlagValue = -1;
+		}
+
+		while (IsMonthBeforeMonth2(Date1, Date2))
+		{
+			Months++;
+
+			Date1 = AddOneMonth(Date1);
+		}
+
+		return (InculdeEndMonth ? ++Months : Months) * SwapFlagValue;
+	}
+
+	int GetDiffrenceInMonths(clsDate Date2, bool InculdeEndMonth = false)
+	{
+		return GetDiffrenceInMonths(*this, Date2, InculdeEndMonth);
 	}
 
 	static int CalculateAgeInDays(clsDate DateOfBirth)
