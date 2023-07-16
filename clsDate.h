@@ -1160,8 +1160,8 @@ public:
 	{
 		return GetDiffrenceInDays(*this, Date2, InculdeEndDay);
 	}
-
-	static int GetDiffrenceInMonths(clsDate Date1, clsDate Date2, bool InculdeEndMonth = false)
+	
+	static int GetDiffrenceBetweenMonths(clsDate Date1, clsDate Date2, bool InculdeEndMonth = false)
 	{
 		int Months = 0;
 		short SwapFlagValue = 1;
@@ -1172,7 +1172,7 @@ public:
 			SwapFlagValue = -1;
 		}
 
-		while (IsMonthBeforeMonth2(Date1, Date2))
+		while (IsDateBeforeDate2(Date1, Date2))
 		{
 			Months++;
 
@@ -1182,9 +1182,9 @@ public:
 		return (InculdeEndMonth ? ++Months : Months) * SwapFlagValue;
 	}
 
-	int GetDiffrenceInMonths(clsDate Date2, bool InculdeEndMonth = false)
+	int GetDiffrenceBetweenMonths(clsDate Date2, bool InculdeEndMonth = false)
 	{
-		return GetDiffrenceInMonths(*this, Date2, InculdeEndMonth);
+		return GetDiffrenceBetweenMonths(*this, Date2, InculdeEndMonth);
 	}
 
 	static int CalculateAgeInDays(clsDate DateOfBirth)
